@@ -29,7 +29,17 @@
   Call your class Employee and receive all the data in the constructor in the order listed above.
 */
 
-//Code Here
+class Employee {
+  constructor (first_name, last_name, email, age){
+    this.first_name = first_name
+    this.last_name = last_name
+    this.email = email
+    this.age = age
+  }
+  makeWidget(){
+    return `${this.first_name} ${this.last_name} Widget`
+  }
+}
 
 
 ////////// PROBLEM 2 //////////
@@ -47,7 +57,21 @@
   Call your new class Manager
 */
 
-//Code Here
+class Manager extends Employee {
+  constructor (first_name, last_name, email, age, reports){
+    super(first_name, last_name, email, age)
+    this.reports = []
+  }
+  makeWidget(){
+    super.makeWidget()
+  }
+  hire (employee){
+    this.reports.push(employee)
+  }
+  fire (index){
+    this.reports.splice(index, 1)
+  }
+}
 
 
 ////////// PROBLEM 3 //////////
@@ -71,7 +95,41 @@
   Call your new class ProgressiveManager
 */
 
-//Code Here
+class ProgressiveManager extends Manager {
+  constructor (first_name, last_name, email, age){
+    super(first_name, last_name, email, age)
+    this.reports = []
+    this.title = 'Not a manager'
+    this.bonus = 0
+  }
+  titleChange(){
+    let repNum = this.reports.length
+    if(repNum === 0){
+      this.title = 'Not a manager'
+    }if(repNum > 0 && repNum <= 3){
+      this.title = 'Barely Manager'
+    }if(repNum > 3 && repNum <= 10){
+      this.title = 'Mostly Manager'
+    }if(repNum > 10 && repNum <= 50){
+      this.title = 'Manager'
+    }if(repNum > 50 && repNum <= 100){
+      this.title = 'Manager Plus'
+    }if(repNum >= 101){
+      this.title = 'Bestest Manager'
+    }
+  }
+  hire (){
+    super.hire()
+    this.titleChange()
+  }
+
+  fire (){
+    super.fire()
+    this.titleChange()
+    this.bonus += 100
+
+  }
+}
 
 
 
@@ -98,6 +156,25 @@
         - The anonymous function should decrease wear_and_tear_count by 10, and set needs_reboot to false
 */
 
-//Code Here
+class Machine {
+  constructor(){
+    this.widgets_made_count = 0
+    this.wear_and_tear_count = 0
+    this.needs_reboot = false
+  }
+  makeWidgets (num) {
+    this.widgets_made_count += num
+    if (this.widgets_made_count % 50 === 0){
+      this.wear_and_tear_count += 1
+    }
+  }
+  fixMachine () {
+    this.needs_reboot = true
+  }
+  reboot () {
+      this.wear_and_tear_count -= 10
+      this.needs_reboot = false
+  }
+}
 
 
