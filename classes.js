@@ -176,8 +176,14 @@ class Machine {
     return () => {  
       this.wear_and_tear_count -= 10
       this.needs_reboot = false
-    }
+    } // 'this' context would refer to the reboot method, so using arrow function allows it to pull context from the Machine class instead.
   }
+  // reboot () {
+  //   return function () {
+  //     this.wear_and_tear_count -=10
+  //     this.needs_reboot = false
+  //   }.bind(this)
+  } // with declarative function notation, 'this' context refers to the reboot function itself. Instead we can bind the function itself with 'this' so it refers to the Machine class.
 }
 
 
